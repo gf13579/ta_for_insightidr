@@ -43,6 +43,24 @@ def get_usage_stats(
         "customer_name": customer_name,
         "query": "get_usage_stats",
     }
+
+    # calculate average daily usage by iterating through data["daily_usage"]
+    total_usage = 0
+    for usage in data["daily_usage"]:
+        total_usage += usage["usage"]
+    average_daily_usage = total_usage / len(data["daily_usage"])
+    avg_daily_usage_in_gb = round(average_daily_usage / 1024 / 1024 / 1024, 2)
+    data["avg_daily_usage_in_gb"] = avg_daily_usage_in_gb
+
+    # now do average of the last 30 days
+    total_usage = 0
+    for usage in data["daily_usage"][-30:]:
+        total_usage += usage["usage"]
+    average_daily_usage = total_usage / 30
+    avg_daily_usage_in_gb = round(average_daily_usage / 1024 / 1024 / 1024, 2)
+
+    data["avg_daily_usage_in_gb_last_30_days"] = avg_daily_usage_in_gb
+
     return {"data": data, "metadata": metadata}
 
 

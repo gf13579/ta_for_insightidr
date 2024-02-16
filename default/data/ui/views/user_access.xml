@@ -1,0 +1,22 @@
+<dashboard version="1.1" theme="light">
+  <label>User Access</label>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index=main metadata.customer_name="CUSTOMER" "metadata.query"=get_user_product_access | table data{}.email, data{}.status, data{}.created, data{}.isAdmin, data{}.orgProductAccess{}.organizationDisplayName</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard> 
